@@ -16,7 +16,7 @@ number = payload["number"]
 
 # Inputs
 branch = ENV["INPUT_BRANCH"]
-branch = branch.sub("NUMBER", number)
+branch = branch.sub("NUMBER", number.to_s) unless number.nil?
 
 # Request
 client = Octokit::Client.new(:access_token => token)
