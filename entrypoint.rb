@@ -32,7 +32,7 @@ begin
     puts "==> Branch \"#{branch}\" deletion failure"
     exit(1)
   end
-rescue Error
+rescue StandardError
   puts "==> Branch \"#{branch}\" not found"
   exit(1) unless be_kind
 end
