@@ -20,6 +20,7 @@ This action simply deletes a branch from origin repository
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
     branch: xyz-PR_NUMBER
+    be_kind: true
 ```
 
 ```yaml

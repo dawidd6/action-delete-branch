@@ -6,6 +6,10 @@ inputs:
     description: 'Branch name to delete'
     required: true
     default: ''
+  be_kind:
+    description: 'Be kind and do not scream if an exception occurs'
+    required: false
+    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
