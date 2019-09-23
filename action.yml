@@ -1,12 +1,11 @@
-name: 'Container Action Template'
-description: 'Get started with Container actions'
-author: 'GitHub'
-inputs: 
-  myInput:
-    description: 'Input to use'
-    default: 'world'
+name: 'delete-branch'
+description: 'Delete branch'
+author: 'dawidd6'
+inputs:
+  branch:
+    description: 'Branch name to delete'
+    required: true
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.myInput }}

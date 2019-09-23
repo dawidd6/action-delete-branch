@@ -1,7 +1,7 @@
-FROM alpine:3.10
+FROM ruby:slim
 
-COPY LICENSE README.md /
+COPY entrypoint.rb /
 
-COPY entrypoint.sh /entrypoint.sh
+RUN gem install octokit
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.rb"]

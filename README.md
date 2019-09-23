@@ -1,5 +1,23 @@
-# Container Action Template
+# action-delete-branch
 
-To get started, click the `Use this template` button on this repository [which will create a new repository based on this template](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/).
+This action simply deletes a branch from origin repository
 
-For info on how to build your first Container action, see the [toolkit docs folder](https://github.com/actions/toolkit/blob/master/docs/container-action.md).
+## Usage
+
+```yaml
+- uses: dawidd6/action-delete-branch@master
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    branch: xyz
+```
+
+```yaml
+# works only if tested commit is referenced to pull request or issue
+# NUMBER is replaced by pull request or issue number
+- uses: dawidd6/action-delete-branch@master
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    branch: xyz-NUMBER
+```
