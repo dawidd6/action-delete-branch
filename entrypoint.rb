@@ -12,8 +12,9 @@ event_path = ENV["GITHUB_EVENT_PATH"]
 # Event
 json = File.read(event_path)
 payload = JSON.parse(json)
-pr_number = payload["pull_request"]["number"]
-pr_head_branch = payload["pull_request"]["head"]["ref"]
+pr = payload["pull_request"]
+pr_number = pr["number"] unless pr.nil?
+pr_head_branch = pr["head"]["ref"] unless pr.nil?
 
 # Inputs
 be_kind = ENV["INPUT_BE_KIND"]
