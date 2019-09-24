@@ -1,5 +1,5 @@
-name: delete-branch
-description: Delete branch from repository
+name: Delete branch
+description: Delete a single branch from repository
 author: dawidd6
 branding:
   icon: git-branch
