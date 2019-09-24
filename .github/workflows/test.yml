@@ -1,5 +1,3 @@
-name: Test action
-
 on:
   push:
     branches:
@@ -8,17 +6,25 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
+    env:
+      BRANCH: test
     steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Ensure that branch does not exist
+        uses: ./
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: $BRANCH
+          be_kind: true
       - name: Create branch
         uses: peterjgrainger/action-create-branch@v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch: test
+          branch: $BRANCH
       - name: Delete branch
-        uses: dawidd6/action-delete-branch@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ./
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: test
+          branch: $BRANCH
