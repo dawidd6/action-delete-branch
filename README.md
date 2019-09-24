@@ -10,5 +10,5 @@ An action that simply deletes a branch from repository.
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
     branch: ${{ github.pull_request.head.ref }}
-    be_kind: true # don't fail on errors
+    be_kind: true # don't fail on errors (optional)
 ```
