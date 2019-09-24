@@ -1,15 +1,20 @@
-name: 'delete-branch'
-description: 'Delete branch'
-author: 'dawidd6'
+name: delete-branch
+description: Delete branch
+author: dawidd6
+branding:
+  icon: git-branch
+  color: red
 inputs:
-  branch:
-    description: 'Branch name to delete'
+  github_token:
+    description: Github token
     required: true
-    default: ''
+  branch:
+    description: Branch name to delete
+    required: true
   be_kind:
-    description: 'Be kind and do not scream if an exception occurs'
+    description: Be kind and do not scream if an exception occurs
     required: false
     default: false
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: docker
+  image: Dockerfile

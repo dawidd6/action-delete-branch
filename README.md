@@ -1,34 +1,14 @@
-# action-delete-branch
+# Delete branch Github Action
 
-This action simply deletes a branch from origin repository
+An action that simply deletes a branch from repository.
 
 ## Usage
 
 ```yaml
-- uses: dawidd6/action-delete-branch@master
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+- name: Delete PR head branch
+  uses: dawidd6/action-delete-branch@master
   with:
-    branch: xyz
-```
-
-```yaml
-# works only if tested commit is referenced to pull request or issue
-# PR_NUMBER is replaced by pull request number
-- uses: dawidd6/action-delete-branch@master
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  with:
-    branch: xyz-PR_NUMBER
-    be_kind: true
-```
-
-```yaml
-# works only if tested commit is referenced to pull request or issue
-# PR_HEAD_BRANCH is replaced by pull request head branch
-- uses: dawidd6/action-delete-branch@master
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  with:
-    branch: PR_HEAD_BRANCH
+    github_token: ${{ secrets.GITHUB_TOKEN }}
+    branch: ${{ github.pull_request.head.ref }}
+    be_kind: true # don't fail on errors
 ```
