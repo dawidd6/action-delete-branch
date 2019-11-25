@@ -8,26 +8,10 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        branch: [test]
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Ensure that branch does not exist
-        uses: ./
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ matrix.branch }}
-          be_kind: true
-      - name: Create branch
-        uses: peterjgrainger/action-create-branch@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          branch: ${{ matrix.branch }}
       - name: Delete branch
         uses: ./
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ matrix.branch }}

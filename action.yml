@@ -1,5 +1,5 @@
-name: Delete branch
-description: Delete a single branch from repository
+name: Delete multiple branches
+description: Delete multiple branches from repository
 author: dawidd6
 branding:
   icon: git-branch
@@ -8,13 +8,18 @@ inputs:
   github_token:
     description: Github token
     required: true
-  branch:
-    description: Branch name to delete
-    required: true
-  be_kind:
-    description: Be kind and do not scream if an exception occurs
+  branches:
+    description: Branches to delete (comma separated)
     required: false
-    default: false
+  numbers:
+    description: PR numbers whose head branches should be deleted (comma separated)
+    required: false
+  prefix:
+    description: Additional prefix to append to every branch name
+    required: false
+  suffix:
+    description: Additional suffix to append to every branch name
+    required: false
 runs:
   using: docker
   image: Dockerfile
