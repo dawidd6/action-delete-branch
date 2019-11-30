@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Delete no branches
+      - name: Test
         uses: ./
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
