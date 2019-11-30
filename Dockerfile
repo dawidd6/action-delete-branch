@@ -1,5 +1,5 @@
 FROM dawidd6/ruby-octokit
 
-COPY entrypoint.rb /
+COPY *.rb /
 
-ENTRYPOINT ["/entrypoint.rb"]
+ENTRYPOINT ["/main.rb"]
