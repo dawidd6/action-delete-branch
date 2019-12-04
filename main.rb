@@ -31,8 +31,10 @@ branches.each do |branch|
       puts "==> Deleted: #{branch}"
     else
       puts "==> Failed to delete: #{branch}"
+      exit 1
     end
   rescue StandardError => e
     puts "==> Error: #{e.message}"
+    exit 1
   end
 end
