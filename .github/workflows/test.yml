@@ -15,24 +15,13 @@ jobs:
         uses: geertvdc/setup-hub@v1.0.0
       - name: Create branches
         run: |
-          git checkout -b prefix-test1
-          git push -f origin prefix-test1
-          git checkout -b prefix-test2
-          git push -f origin prefix-test2
-          git checkout -b prefix-pr
-          git push -f origin prefix-pr
-      - name: Create PR
-        env:
-          GITHUB_USER: ${{github.actor}}
-          GITHUB_TOKEN: ${{github.token}}
-        run: |
-          hub pull-request --no-edit
+          git checkout -b prefix-test1-suffix
+          git push -f origin prefix-test1-suffix
+          git checkout -b prefix-test2-suffix
+          git push -f origin prefix-test2-suffix
       - name: Test action
         uses: ./
         with:
           branches: test1,test2
           prefix: prefix-
-      - name: Test action
-        uses: ./
-        with:
-          numbers: ${{steps.pr.outputs.pr_number}}
+          suffix: -suffix
