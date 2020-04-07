@@ -17,8 +17,19 @@ jobs:
           git push -f origin prefix-test1
           git checkout -b prefix-test2
           git push -f origin prefix-test2
+          git checkout -b prefix-pr
+          git push -f origin prefix-pr
+      - name: Create PR
+        id: pr
+        uses: peter-evans/create-pull-request@v2
+        with:
+          branch: prefix-pr
       - name: Test action
         uses: ./
         with:
           branches: test1,test2
           prefix: prefix-
+      - name: Test action
+        uses: ./
+        with:
+          numbers: ${{steps.pr.outputs.pr_number}}
