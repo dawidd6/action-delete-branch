@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Setup hub
+        uses: geertvdc/setup-hub@v1.0.0
       - name: Create branches
         run: |
           git checkout -b prefix-test1
@@ -20,10 +22,8 @@ jobs:
           git checkout -b prefix-pr
           git push -f origin prefix-pr
       - name: Create PR
-        id: pr
-        uses: peter-evans/create-pull-request@v2
-        with:
-          branch: prefix-pr
+        run: |
+          hub pull-request --no-edit
       - name: Test action
         uses: ./
         with:
