@@ -3,7 +3,7 @@ const github = require('@actions/github')
 
 async function main() {
     try {
-        const github_token = core.getInput("token", { required: true })
+        const github_token = core.getInput("github_token", { required: true })
         const numbers = core.getInput("numbers")
         const branches = core.getInput("branches")
         const prefix = core.getInput("prefix")
