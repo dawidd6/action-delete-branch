@@ -23,7 +23,7 @@ async function main() {
             }
         }
 
-        for (let branch of branchesToDelete.length) {
+        for (let branch of branchesToDelete) {
             if (prefix)
                 branch = prefix + branch
             if (suffix)
