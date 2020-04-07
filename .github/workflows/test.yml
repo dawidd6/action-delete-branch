@@ -14,9 +14,9 @@ jobs:
       - name: Create branches
         run: |
           git checkout -b test1
-          git push origin test1
+          git push -f origin test1
           git checkout -b test2
-          git push origin test2
+          git push -f origin test2
       - name: Test action
         uses: ./
         with:
