@@ -7,20 +7,20 @@ Optionally one can provide a `prefix` or `suffix` strings that would be appended
 
 ```yaml
 - name: Delete PRs head branches
-  uses: dawidd6/action-delete-branch@v2
+  uses: dawidd6/action-delete-branch@v3
   with:
-    github_token: ${{ secrets.GITHUB_TOKEN }}
-    numbers: 13,22,${{ github.event.pull_request.number }}
+    github_token: ${{github.token}}
+    numbers: 13,22,${{github.event.pull_request.number}}
 - name: Delete pr-* branches
-  uses: dawidd6/action-delete-branch@v2
+  uses: dawidd6/action-delete-branch@v3
   with:
-    github_token: ${{ secrets.GITHUB_TOKEN }}
+    github_token: ${{github.token}}
     branches: 13,22,33
-    prefix: 'pr-'
+    prefix: pr-
 - name: Delete branch
-  uses: dawidd6/action-delete-branch@v2
+  uses: dawidd6/action-delete-branch@v3
   with:
-    github_token: ${{ secrets.GITHUB_TOKEN }}
+    github_token: ${{github.token}}
     branches: test
-    suffix: '-done'
+    suffix: -done
 ```
