@@ -22,5 +22,5 @@ inputs:
     description: Additional suffix to append to every branch name
     required: false
 runs:
-  using: docker
-  image: Dockerfile
+  using: node12
+  main: main.js
