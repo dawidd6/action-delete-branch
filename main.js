@@ -31,7 +31,7 @@ async function main() {
             console.log("==> Deleting \"" + branch + "\" branch")
             const response = await client.git.deleteRef({
                 ...github.context.repo,
-                ref: "refs/heads/" + branch
+                ref: "heads/" + branch
             })
             console.log(response)
         }
