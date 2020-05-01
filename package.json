@@ -1,7 +1,7 @@
 {
   "name": "action-delete-branch",
   "dependencies": {
-    "@actions/core": "^1.2.3",
+    "@actions/core": "^1.2.4",
     "@actions/github": "^2.1.1"
   }
 }
