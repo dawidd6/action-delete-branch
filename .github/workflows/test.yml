@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Setup hub
-        uses: geertvdc/setup-hub@v1.0.0
       - name: Create branches
         run: |
           git checkout -b prefix-test1-suffix
