@@ -6,7 +6,7 @@ branding:
   color: red
 inputs:
   github_token:
-    description: Github token
+    description: GitHub token
     required: false
     default: ${{github.token}}
   branches:

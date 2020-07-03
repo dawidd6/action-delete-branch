@@ -1,4 +1,4 @@
-# Delete multiple branches Github Action
+# Delete multiple branches GitHub Action
 
 An action that deletes multiple branches from repository.
 Optionally one can provide a `prefix` or `suffix` strings that would be appended or prepended to every branch name.
