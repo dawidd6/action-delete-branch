@@ -19,7 +19,7 @@ async function main() {
                     ...github.context.repo,
                     pull_number: number
                 })
-                brancheToDelete.push(pull.data.head.ref)
+                branchesToDelete.push(pull.data.head.ref)
             }
         }
 
