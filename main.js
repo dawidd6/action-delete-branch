@@ -3,13 +3,13 @@ const github = require('@actions/github')
 
 async function main() {
     try {
-        const github_token = core.getInput("github_token", { required: true })
+        const token = core.getInput("github_token", { required: true })
         const numbers = core.getInput("numbers")
         const branches = core.getInput("branches")
         const prefix = core.getInput("prefix")
         const suffix = core.getInput("suffix")
 
-        const client = github.getOctokit(github_token)
+        const client = github.getOctokit(token)
 
         let branchesToDelete = branches ? branches.split(",") : []
 
