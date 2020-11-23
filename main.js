@@ -29,10 +29,14 @@ async function main() {
             if (suffix)
                 branch = branch + suffix
             console.log("==> Deleting \"" + branch + "\" branch")
-            await client.git.deleteRef({
-                ...github.context.repo,
-                ref: "heads/" + branch
-            })
+            try {
+                await client.git.deleteRef({
+                    ...github.context.repo,
+                    ref: "heads/" + branch
+                })
+            } catch (er) {
+                core.warning(er.message)
+            }
         }
     } catch (error) {
         core.setFailed(error.message)
