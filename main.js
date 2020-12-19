@@ -40,7 +40,9 @@ async function main() {
             });
         }
 
+        console.log("Starting the branch deletion...");
         for (let branch of branchesToDelete) {
+            console.log(branch);
             if (prefix && !branchesToDelete.includes(prefix + branch))
                 branch = prefix + branch
             if (suffix)
@@ -51,6 +53,7 @@ async function main() {
                 ref: "heads/" + branch
             })
         }
+        console.log("Ending the branch deletion...");
     } catch (error) {
         core.setFailed(error.message)
     }
