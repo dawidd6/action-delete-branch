@@ -26,7 +26,7 @@ async function main() {
         }
         
         if (prefix && owner && repo) {
-            client.paginate("GET /repos/{owner}/{repo}/branches", {
+            const branchFunc = await client.paginate("GET /repos/{owner}/{repo}/branches", {
                 owner: owner,
                 repo: repo
             })
