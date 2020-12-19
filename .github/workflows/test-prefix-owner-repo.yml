@@ -1,0 +1,25 @@
+name: Test action
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create branches
+        run: |
+          git checkout -b prefix-test1
+          git push -f origin prefix-test1
+          git checkout -b prefix-test2
+          git push -f origin prefix-test2
+      - name: Test action
+        uses: ./
+        with:
+          prefix: prefix-
+          owner: bryanjebyrd
+          repo: action-delete-branch
