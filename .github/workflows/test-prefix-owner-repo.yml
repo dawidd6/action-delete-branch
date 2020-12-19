@@ -1,4 +1,4 @@
-name: Test action
+name: Test prefix-owner-repo action
 
 on:
   push:
