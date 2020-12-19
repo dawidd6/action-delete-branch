@@ -32,7 +32,6 @@ async function main() {
             })
             .then((branches) => {
                for (let branch of branches) {
-                   console.log(branch)
                    if (branch.name.substring(0, prefix.length) == prefix) {
                        console.log("Adding branch: " + branch.name + " for deletion.");
                        branchesToDelete.push(branch.name)
@@ -42,7 +41,7 @@ async function main() {
         }
 
         for (let branch of branchesToDelete) {
-            if (prefix)
+            if (prefix && !branchesToDelete.includes(prefix + branch))
                 branch = prefix + branch
             if (suffix)
                 branch = branch + suffix
