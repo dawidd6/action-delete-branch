@@ -32,7 +32,8 @@ async function main() {
             })
             .then((branches) => {
                for (let branch of branches) {
-                   if (branch.substring(0, prefix.length) == prefix) {
+                   console.log(branch)
+                   if (branch.name.substring(0, prefix.length) == prefix) {
                        console.log("Adding branch: " + branch.name + " for deletion.");
                        branchesToDelete.push(branch.name)
                    }
