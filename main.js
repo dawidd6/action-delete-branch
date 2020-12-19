@@ -8,6 +8,8 @@ async function main() {
         const branches = core.getInput("branches")
         const prefix = core.getInput("prefix")
         const suffix = core.getInput("suffix")
+        const owner = core.getInput("owner")
+        const repo = core.getInput("repo")
 
         const client = github.getOctokit(token)
 
@@ -21,6 +23,20 @@ async function main() {
                 })
                 branchesToDelete.push(pull.data.head.ref)
             }
+        }
+        
+        if (prefix) {
+            client.paginate("GET /repos/{owner}/{repo}/branches", {
+                owner: owner,
+                repo: repo
+            })
+            .then((branches) => {
+               for (let branch of branches) {
+                   if (branch.startsWith(prefix)) {
+                       branchesToDelete.push(branch.name)
+                   }
+               }
+            });
         }
 
         for (let branch of branchesToDelete) {
