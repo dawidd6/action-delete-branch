@@ -21,6 +21,12 @@ inputs:
   suffix:
     description: Additional suffix to append to every branch name
     required: false
+  owner:
+    description: The GitHub owner name (required with repo)
+    required: false
+  repo:
+    description: The GitHub repo name which is under the owner (required with owner)
+    required: false
 runs:
   using: node12
   main: main.js
