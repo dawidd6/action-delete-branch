@@ -13,6 +13,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Create branches
         run: |
+          sleep 30
           git checkout -b prefix-test1
           git push -f origin prefix-test1
           git checkout -b prefix-test2
