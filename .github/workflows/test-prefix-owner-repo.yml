@@ -16,7 +16,9 @@ jobs:
           git checkout -b test-prefix-1
           git push -f origin test-prefix-1
           git checkout -b test-prefix-2
-          git push -f origin test-prefix-1
+          git push -f origin test-prefix-2
+          git checkout -b test-prefix-3
+          git push -f origin test-prefix-3
       - name: Test action
         uses: ./
         with:
