@@ -13,14 +13,13 @@ jobs:
         uses: actions/checkout@v2
       - name: Create branches
         run: |
-          sleep 30
-          git checkout -b prefix-test1
-          git push -f origin prefix-test1
-          git checkout -b prefix-test2
-          git push -f origin prefix-test2
+          git checkout -b test-prefix-1
+          git push -f origin test-prefix-1
+          git checkout -b test-prefix-2
+          git push -f origin test-prefix-1
       - name: Test action
         uses: ./
         with:
-          prefix: prefix-
+          prefix: test-prefix-
           owner: bryanjebyrd
           repo: action-delete-branch
