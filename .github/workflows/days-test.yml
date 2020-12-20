@@ -3,7 +3,7 @@ name: Test days input
 on:
   push:
     branches:
-      - master
+      - '**'
 
 jobs:
   main:
