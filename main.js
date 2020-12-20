@@ -8,7 +8,7 @@ async function main() {
         const branches = core.getInput("branches")
         const prefix = core.getInput("prefix")
         const suffix = core.getInput("suffix")
-        const dryRun = core.getInput("dry-run")
+        const dryRun = core.getInput("dry_run")
 
         const client = github.getOctokit(token)
 
