@@ -23,3 +23,9 @@ jobs:
         uses: ./
         with:
           days: -1
+          prefix: days-
+      - name: Delete branches
+        run: |
+          git push -d origin days-1
+          git push -d origin days-2
+          git push -d origin days-3
