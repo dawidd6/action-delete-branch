@@ -3,7 +3,7 @@ name: Test prefix
 on:
   push:
     branches:
-      - master
+      - "**"
 
 jobs:
   main:
