@@ -16,7 +16,13 @@ async function main() {
         const ownerName = github.context.payload.repository.owner.name;
 
         let branchesToDelete = branches ? branches.split(",") : []
-
+        let dateThreshold = new Date();
+        
+        if (days) {
+            dateThreshold.setDate(dateThreshold.getDate() - days);
+            console.log("Branches with commits older than " + dateThreshold.toString() + " will be deleted.");
+        }
+        
         if (numbers) {
             for (const number of numbers.split(",")) {
                 const pull = await client.pulls.get({
@@ -50,10 +56,6 @@ async function main() {
             
             let canDelete = true;
             if (days) {
-                let dateThreshold = new Date();
-                dateThreshold.setDate(dateThreshold.getDate() - days);
-                console.log("Branches with commits older than " + dateThreshold.toString() + " will be deleted.");
-                
                 await client.request("GET /repos/{owner}/{repo}/branches/{branch}", {
                     owner: ownerName,
                     repo: repoName,
@@ -62,15 +64,14 @@ async function main() {
                 .then((ghBranch) => {
                     let branchLastCommitDate = new Date(ghBranch.data.commit.commit.committer.date);
                     if (branchLastCommitDate > dateThreshold) {
-                        console.log("Branch \"" + branch + "\" last commit date was " + branchLastCommitDate.toString() + ". It does not meet the threshold and will not be deleted.");
+                        console.log("Branch \"" + branch + "\" last commit date is " + branchLastCommitDate.toString() + ". It does not meet the threshold and will not be deleted.");
                         canDelete = false;
                     }
                 });
             }
-            if (!canDelete) {
-                console.log("Unable to delete \"" + branch + "\" branch");     
+            
+            if (!canDelete)
                 continue;
-            }
             
             console.log("==> Deleting \"" + branch + "\" branch");
 
