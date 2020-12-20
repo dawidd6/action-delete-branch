@@ -8,6 +8,7 @@ async function main() {
         const branches = core.getInput("branches")
         const prefix = core.getInput("prefix")
         const suffix = core.getInput("suffix")
+        const dryRun = core.getInput("dry-run")
         const owner = core.getInput("owner")
         const repo = core.getInput("repo")
 
@@ -39,18 +40,25 @@ async function main() {
                }
             });
         }
-
-        console.log("Starting the branch deletion...");
+        
+        console.log(JSON.stringify(github.context);
+        console.log("Starting the branch deletion...");        
         for (let branch of branchesToDelete) {
+            
             if (prefix && !owner && !repo)
                 branch = prefix + branch
+            
             if (suffix)
                 branch = branch + suffix
+            
             console.log("==> Deleting \"" + branch + "\" branch")
-            await client.git.deleteRef({
-                ...github.context.repo,
-                ref: "heads/" + branch
-            })
+
+            if (!dryRun) {
+                await client.git.deleteRef({
+                    ...github.context.repo,
+                    ref: "heads/" + branch
+                })
+            }
         }
         console.log("Ending the branch deletion...");
     } catch (error) {
