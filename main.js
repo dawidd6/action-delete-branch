@@ -12,6 +12,8 @@ async function main() {
         const days = core.getInput("days")
 
         const client = github.getOctokit(token)
+        const repoName = github.context.payload.repository.name;
+        const ownerName = github.context.payload.repository.owner.name;
 
         let branchesToDelete = branches ? branches.split(",") : []
 
@@ -26,8 +28,6 @@ async function main() {
         }
         
         if (prefix) {
-            var repoName = github.context.payload.repository.name;
-            var ownerName = github.context.payload.repository.owner.name;
             const branchFunc = await client.paginate("GET /repos/{owner}/{repo}/branches", {
                 owner: ownerName,
                 repo: repoName
@@ -48,9 +48,26 @@ async function main() {
             if (suffix)
                 branch = branch + suffix
             
-            // get date now, then subtract the days from date now, and check if the last commit date is older than that date threshold
+            let dateThreshold = new Date();
+            dateThreshold.setDate(dateThreshold.getDate() - days);
+            let canDelete = true;
+            await client.request("GET /repos/{owner}/{repo}/branches/{branch}", {
+                owner: ownerName,
+                repo: repoName,
+                branch: branch
+            })
+            .then((ghBranch) => {
+                if (ghBranch.commit.commit.committer.date <= dateThreshold) {
+                    canDelete = false;
+                }
+            });
             
-            console.log("==> Deleting \"" + branch + "\" branch")
+            if (!canDelete) {
+                console.log("Unable to delete \"" + branch + "\" branch");     
+                continue;
+            }
+            
+            console.log("==> Deleting \"" + branch + "\" branch");
 
             if (!dryRun) {
                 await client.git.deleteRef({
