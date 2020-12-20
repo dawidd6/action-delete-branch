@@ -1,0 +1,26 @@
+name: Test negative days input
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create branches
+        run: |
+          git checkout -b test-days-1
+          git push -f origin test-days-1
+          git checkout -b test-days-2
+          git push -f origin test-days-2
+          git checkout -b test-days-3
+          git push -f origin test-days-3
+      - name: Test action
+        uses: ./
+        with:
+          days: -1
+          prefix: test-days-

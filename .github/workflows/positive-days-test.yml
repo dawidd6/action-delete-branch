@@ -1,0 +1,31 @@
+name: Test positive days input
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create branches
+        run: |
+          git checkout -b positive-test-days-1
+          git push -f origin positive-test-days-1
+          git checkout -b positive-test-days-2
+          git push -f origin positive-test-days-2
+          git checkout -b positive-test-days-3
+          git push -f origin positive-test-days-3
+      - name: Test action
+        uses: ./
+        with:
+          days: 10
+          prefix: positive-test-days-
+      - name: Delete branches (clean up)
+        run: |
+          git push -d origin positive-test-days-1
+          git push -d origin positive-test-days-2
+          git push -d origin positive-test-days-3
