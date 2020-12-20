@@ -61,6 +61,9 @@ async function main() {
                 })
                 .then((ghBranch) => {
                     let branchLastCommitDate = new Date(ghBranch.data.commit.commit.committer.date);
+                    console.log(branchLastCommitDate.toString());
+                    console.log(dateThreshold.toString());
+                    console.log(branchLastCommitDate < dateThreshold);
                     if (branchLastCommitDate < dateThreshold) {
                         console.log("Branch \"" + branch + "\" last commit date was " + branchLastCommitDate.toString() + ". It does not meet the threshold and will not be deleted.");
                         canDelete = false;
