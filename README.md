@@ -6,7 +6,6 @@ Optionally one can provide a `prefix` or `suffix` strings that would be appended
 ## Usage
 
 > Do not specify `numbers` and `branches` together when `prefix` or `suffix` are set.
-> Do not specifiy `numbers` and `branches` together when `owner` and `repo` are set.
 
 ```yaml
 - name: Delete PRs head branches
