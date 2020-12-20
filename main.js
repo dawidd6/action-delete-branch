@@ -48,20 +48,24 @@ async function main() {
             if (suffix)
                 branch = branch + suffix
             
-            let dateThreshold = new Date();
-            dateThreshold.setDate(dateThreshold.getDate() - days);
             let canDelete = true;
-            await client.request("GET /repos/{owner}/{repo}/branches/{branch}", {
-                owner: ownerName,
-                repo: repoName,
-                branch: branch
-            })
-            .then((ghBranch) => {
-                if (ghBranch.data.commit.commit.committer.date <= dateThreshold) {
-                    canDelete = false;
-                }
-            });
-            
+            if (days) {
+                let dateThreshold = new Date();
+                dateThreshold.setDate(dateThreshold.getDate() - days);
+                console.log("Branches older than " + dateThreshold.toString() + " will be deleted.");
+                
+                await client.request("GET /repos/{owner}/{repo}/branches/{branch}", {
+                    owner: ownerName,
+                    repo: repoName,
+                    branch: branch
+                })
+                .then((ghBranch) => {
+                    console.log("Branch \"" + branch + "\" last commit date was " + ghBranch.data.commit.commit.committer.date);
+                    if (ghBranch.data.commit.commit.committer.date <= dateThreshold) {
+                        canDelete = false;
+                    }
+                });
+            }
             if (!canDelete) {
                 console.log("Unable to delete \"" + branch + "\" branch");     
                 continue;
