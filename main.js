@@ -57,7 +57,6 @@ async function main() {
                 branch: branch
             })
             .then((ghBranch) => {
-                console.log(JSON.stringify(ghBranch));
                 if (ghBranch.data.commit.commit.committer.date <= dateThreshold) {
                     canDelete = false;
                 }
