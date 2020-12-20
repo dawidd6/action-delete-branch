@@ -9,8 +9,6 @@ async function main() {
         const prefix = core.getInput("prefix")
         const suffix = core.getInput("suffix")
         const dryRun = core.getInput("dry-run")
-        const owner = core.getInput("owner")
-        const repo = core.getInput("repo")
 
         const client = github.getOctokit(token)
 
@@ -26,13 +24,11 @@ async function main() {
             }
         }
         
-        console.log(JSON.stringify(github.context.repo));
-        
-        if (prefix && owner && repo) {
+        if (prefix) {
             var repoName = github.context.payload.repository.name;
             var ownerName = github.context.payload.repository.owner.name;
             const branchFunc = await client.paginate("GET /repos/{owner}/{repo}/branches", {
-                owner: ownerName,
+                owner: github.context.,
                 repo: repoName
             })
             .then((branches) => {
@@ -48,7 +44,7 @@ async function main() {
         console.log("Starting the branch deletion...");        
         for (let branch of branchesToDelete) {
             
-            if (prefix && !owner && !repo)
+            if (prefix && branch.substring(0, prefix.length) != prefix)
                 branch = prefix + branch
             
             if (suffix)
