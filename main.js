@@ -41,7 +41,7 @@ async function main() {
             });
         }
         
-        console.log(JSON.stringify(github.context);
+        console.log(JSON.stringify(github.context));
         console.log("Starting the branch deletion...");        
         for (let branch of branchesToDelete) {
             
