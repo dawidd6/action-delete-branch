@@ -52,7 +52,7 @@ async function main() {
             if (days) {
                 let dateThreshold = new Date();
                 dateThreshold.setDate(dateThreshold.getDate() - days);
-                console.log("Branches older than " + dateThreshold.toString() + " will be deleted.");
+                console.log("Branches with commits older than " + dateThreshold.toString() + " will be deleted.");
                 
                 await client.request("GET /repos/{owner}/{repo}/branches/{branch}", {
                     owner: ownerName,
@@ -60,8 +60,8 @@ async function main() {
                     branch: branch
                 })
                 .then((ghBranch) => {
-                    console.log("Branch \"" + branch + "\" last commit date was " + ghBranch.data.commit.commit.committer.date);
                     if (ghBranch.data.commit.commit.committer.date <= dateThreshold) {
+                        console.log("Branch \"" + branch + "\" last commit date was " + ghBranch.data.commit.commit.committer.date + ". It does not meet the threshold and will not be deleted.");
                         canDelete = false;
                     }
                 });
