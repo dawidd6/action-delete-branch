@@ -28,7 +28,7 @@ async function main() {
             var repoName = github.context.payload.repository.name;
             var ownerName = github.context.payload.repository.owner.name;
             const branchFunc = await client.paginate("GET /repos/{owner}/{repo}/branches", {
-                owner: github.context.,
+                owner: ownerName,
                 repo: repoName
             })
             .then((branches) => {
