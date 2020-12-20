@@ -1,4 +1,4 @@
-name: Test days input
+name: Test negative days input
 
 on:
   push:
@@ -24,8 +24,3 @@ jobs:
         with:
           days: -1
           prefix: test-days-
-      - name: Delete branches
-        run: |
-          git push -d origin test-days-1
-          git push -d origin test-days-2
-          git push -d origin test-days-3
