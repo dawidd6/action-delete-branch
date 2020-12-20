@@ -23,5 +23,3 @@ jobs:
         uses: ./
         with:
           prefix: test-prefix-
-          owner: bryanjebyrd
-          repo: action-delete-branch
