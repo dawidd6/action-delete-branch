@@ -60,8 +60,9 @@ async function main() {
                     branch: branch
                 })
                 .then((ghBranch) => {
-                    if (ghBranch.data.commit.commit.committer.date <= dateThreshold) {
-                        console.log("Branch \"" + branch + "\" last commit date was " + ghBranch.data.commit.commit.committer.date + ". It does not meet the threshold and will not be deleted.");
+                    let branchLastCommitDate = new Date(ghBranch.data.commit.commit.committer.date);
+                    if (branchLastCommitDate < dateThreshold) {
+                        console.log("Branch \"" + branch + "\" last commit date was " + branchLastCommitDate.toString() + ". It does not meet the threshold and will not be deleted.");
                         canDelete = false;
                     }
                 });
