@@ -1,4 +1,4 @@
-name: Test action
+name: Suffix Test action
 
 on:
   push:
@@ -13,13 +13,12 @@ jobs:
         uses: actions/checkout@v2
       - name: Create branches
         run: |
-          git checkout -b prefix-test1-suffix
-          git push -f origin prefix-test1-suffix
-          git checkout -b prefix-test2-suffix
-          git push -f origin prefix-test2-suffix
+          git checkout -b test1-suffix
+          git push -f origin test1-suffix
+          git checkout -b test2-suffix
+          git push -f origin test2-suffix
       - name: Test action
         uses: ./
         with:
           branches: test1,test2
-          prefix: prefix-
           suffix: -suffix
