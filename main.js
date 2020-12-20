@@ -27,9 +27,11 @@ async function main() {
         }
         
         if (prefix && owner && repo) {
+            var repoName = github.context.repo.name;
+            var ownerName = github.context.owner.name;
             const branchFunc = await client.paginate("GET /repos/{owner}/{repo}/branches", {
-                owner: owner,
-                repo: repo
+                owner: ownerName,
+                repo: repoName
             })
             .then((branches) => {
                for (let branch of branches) {
@@ -41,7 +43,7 @@ async function main() {
             });
         }
         
-        console.log(JSON.stringify(github.context));
+        console.log(JSON.stringify(github.context.repo));
         console.log("Starting the branch deletion...");        
         for (let branch of branchesToDelete) {
             
