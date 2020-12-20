@@ -44,9 +44,6 @@ async function main() {
         console.log("Starting the branch deletion...");        
         for (let branch of branchesToDelete) {
             
-            if (prefix && branch.substring(0, prefix.length) != prefix)
-                branch = prefix + branch
-            
             if (suffix)
                 branch = branch + suffix
             
