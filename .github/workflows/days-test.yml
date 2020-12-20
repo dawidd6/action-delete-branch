@@ -1,0 +1,25 @@
+name: Test days input
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create branches
+        run: |
+          git checkout -b days-1
+          git push -f origin days-1
+          git checkout -b days-2
+          git push -f origin days-2
+          git checkout -b days-3
+          git push -f origin days-3
+      - name: Test action
+        uses: ./
+        with:
+          days: -1
