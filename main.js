@@ -9,6 +9,7 @@ async function main() {
         const prefix = core.getInput("prefix")
         const suffix = core.getInput("suffix")
         const dryRun = core.getInput("dry_run")
+        const days = core.getInput("days")
 
         const client = github.getOctokit(token)
 
@@ -46,6 +47,8 @@ async function main() {
             
             if (suffix)
                 branch = branch + suffix
+            
+            // get date now, then subtract the days from date now, and check if the last commit date is older than that date threshold
             
             console.log("==> Deleting \"" + branch + "\" branch")
 
