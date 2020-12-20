@@ -3,7 +3,7 @@ name: Suffix Test action
 on:
   push:
     branches:
-      - master
+      - "**"
 
 jobs:
   main:

@@ -24,6 +24,9 @@ inputs:
   dry_run:
     description: Runs the action without deleting branhes
     required: false
+  days:
+    description: Delete branches that are older than the today's date minus number of days
+    required: false
 runs:
   using: node12
   main: main.js

@@ -9,11 +9,20 @@ async function main() {
         const prefix = core.getInput("prefix")
         const suffix = core.getInput("suffix")
         const dryRun = core.getInput("dry_run")
+        const days = core.getInput("days")
 
         const client = github.getOctokit(token)
+        const repoName = github.context.payload.repository.name;
+        const ownerName = github.context.payload.repository.owner.name;
 
         let branchesToDelete = branches ? branches.split(",") : []
-
+        let dateThreshold = new Date();
+        
+        if (days) {
+            dateThreshold.setDate(dateThreshold.getDate() - days);
+            console.log("Branches with commits older than " + dateThreshold.toString() + " will be deleted.");
+        }
+        
         if (numbers) {
             for (const number of numbers.split(",")) {
                 const pull = await client.pulls.get({
@@ -25,8 +34,6 @@ async function main() {
         }
         
         if (prefix) {
-            var repoName = github.context.payload.repository.name;
-            var ownerName = github.context.payload.repository.owner.name;
             const branchFunc = await client.paginate("GET /repos/{owner}/{repo}/branches", {
                 owner: ownerName,
                 repo: repoName
@@ -47,7 +54,26 @@ async function main() {
             if (suffix)
                 branch = branch + suffix
             
-            console.log("==> Deleting \"" + branch + "\" branch")
+            let canDelete = true;
+            if (days) {
+                await client.request("GET /repos/{owner}/{repo}/branches/{branch}", {
+                    owner: ownerName,
+                    repo: repoName,
+                    branch: branch
+                })
+                .then((ghBranch) => {
+                    let branchLastCommitDate = new Date(ghBranch.data.commit.commit.committer.date);
+                    if (branchLastCommitDate > dateThreshold) {
+                        console.log("Branch \"" + branch + "\" last commit date is " + branchLastCommitDate.toString() + ". It does not meet the threshold and will not be deleted.");
+                        canDelete = false;
+                    }
+                });
+            }
+            
+            if (!canDelete)
+                continue;
+            
+            console.log("==> Deleting \"" + branch + "\" branch");
 
             if (!dryRun) {
                 await client.git.deleteRef({

@@ -1,7 +1,7 @@
 # Delete multiple branches GitHub Action
 
 An action that deletes multiple branches from repository.
-Optionally one can provide a `prefix` or `suffix` strings that would be appended or prepended to every branch name.
+Optionally one can provide a `suffix` strings that would be appended or prepended to every branch name.
 
 ## Usage
 
@@ -25,4 +25,9 @@ Optionally one can provide a `prefix` or `suffix` strings that would be appended
     github_token: ${{github.token}}
     branches: test
     suffix: -done
+- name: Delete branches older than 10 days
+  uses: dawidd6/action-delete-branch@v3
+  with:
+    github_token: ${{github.token}}
+    days: 10
 ```

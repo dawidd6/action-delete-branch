@@ -1,9 +1,9 @@
-name: Test prefix-owner-repo action
+name: Test prefix
 
 on:
   push:
     branches:
-      - master
+      - "**"
 
 jobs:
   main:
