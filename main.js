@@ -34,7 +34,7 @@ async function main() {
             if (suffix)
                 branch = branch + suffix
             
-            console.log("==> Deleting \"" + branch + "\" branch")
+            console.log("==> Deleting \"" + ownerOfRepository + "/" + repositoryContainingBranches + "/" + branch + "\" branch")
             
             await client.git.deleteRef({
                 owner: ownerOfRepository,
