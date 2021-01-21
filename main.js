@@ -36,11 +36,15 @@ async function main() {
             
             console.log("==> Deleting \"" + ownerOfRepository + "/" + repositoryContainingBranches + "/" + branch + "\" branch")
             
-            await client.git.deleteRef({
-                owner: ownerOfRepository,
-                repo: repositoryContainingBranches,
-                ref: "heads/" + branch
-            })
+            try {
+                await client.git.deleteRef({
+                    owner: ownerOfRepository,
+                    repo: repositoryContainingBranches,
+                    ref: "heads/" + branch
+                })
+            } catch (error) {
+                core.warning(error.message)
+            }
         }
     } catch (error) {
         core.setFailed(error.message)
