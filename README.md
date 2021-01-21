@@ -27,8 +27,8 @@ If it is needed to specify which owner and repository the branches are located i
     branches: test
     suffix: -done
  - name: Delete branch in specific repository with a specific owner
-  uses: dawidd6/action-delete-branch@v3
-  with:
+   uses: dawidd6/action-delete-branch@v3
+   with:
     github_token: ${{github.token}}
     owner: specific-owner
     repository: specific-repository
