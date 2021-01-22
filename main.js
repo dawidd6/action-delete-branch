@@ -10,7 +10,6 @@ async function main() {
         const branches = core.getInput("branches")
         const prefix = core.getInput("prefix")
         const suffix = core.getInput("suffix")
-        const soft_fail = core.getInput("soft_fail")
 
         const client = github.getOctokit(token)
 
@@ -37,20 +36,11 @@ async function main() {
             
             console.log("==> Deleting \"" + ownerOfRepository + "/" + repositoryContainingBranches + "/" + branch + "\" branch")
             
-            try {
-                await client.git.deleteRef({
-                    owner: ownerOfRepository,
-                    repo: repositoryContainingBranches,
-                    ref: "heads/" + branch
-                })
-            } catch (error) {
-                const shouldFailSoftly = (soft_fail === 'true');
-                
-                if(shouldFailSoftly)
-                    core.warning(error.message)
-                else
-                    core.setFailed(error.message)
-            }
+            await client.git.deleteRef({
+                owner: ownerOfRepository,
+                repo: repositoryContainingBranches,
+                ref: "heads/" + branch
+            })
         }
     } catch (error) {
         core.setFailed(error.message)

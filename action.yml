@@ -27,10 +27,6 @@ inputs:
   suffix:
     description: Additional suffix to append to every branch name
     required: false
-  soft_fail:
-    description: If set to `true` the workflow will continue if a branch reference is not found
-    required: false
-    default: false
 runs:
   using: node12
   main: main.js

@@ -3,7 +3,6 @@
 An action that deletes multiple branches from repository.
 Optionally one can provide a `prefix` or `suffix` strings that would be appended or prepended to every branch name.
 If it is needed to specify which owner and repository the branches are located in, then the `owner` and `repository` can be provided as well.
-If setting the `soft_fail` flag to `true` a warning will be written to the console, and the action will continue, instead of the action failing. The default is `false`.
 
 ## Usage
 
