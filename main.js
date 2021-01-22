@@ -46,7 +46,7 @@ async function main() {
             } catch (error) {
                 const shouldFailSoftly = (soft_fail === 'true');
                 
-                if(shouldFailSoftly === )
+                if(shouldFailSoftly)
                     core.warning(error.message)
                 else
                     core.setFailed(error.message)
