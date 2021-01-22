@@ -9,6 +9,12 @@ inputs:
     description: GitHub token
     required: false
     default: ${{github.token}}
+  owner:
+    description: Owner of the repository. The owner will be deducted from env vars
+    required: false
+  repository:
+    description: The repository containing the branch(es) to be deleted. The repository name will be deducted from env vars
+    required: false
   branches:
     description: Branches to delete (comma separated)
     required: false
