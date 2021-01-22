@@ -5,9 +5,12 @@ async function main() {
     try {
         const token = core.getInput("github_token", { required: true })
         const numbers = core.getInput("numbers")
+        const owner = core.getInput("owner")
+        const repository = core.getInput("repository")
         const branches = core.getInput("branches")
         const prefix = core.getInput("prefix")
         const suffix = core.getInput("suffix")
+        const soft_fail = core.getInput("soft_fail")
 
         const client = github.getOctokit(token)
 
@@ -23,16 +26,31 @@ async function main() {
             }
         }
 
+        let ownerOfRepository = owner ? owner : github.context.repo.owner
+        let repositoryContainingBranches = repository ? repository : github.context.repo.repo
+        
         for (let branch of branchesToDelete) {
             if (prefix)
                 branch = prefix + branch
             if (suffix)
                 branch = branch + suffix
-            console.log("==> Deleting \"" + branch + "\" branch")
-            await client.git.deleteRef({
-                ...github.context.repo,
-                ref: "heads/" + branch
-            })
+            
+            console.log("==> Deleting \"" + ownerOfRepository + "/" + repositoryContainingBranches + "/" + branch + "\" branch")
+            
+            try {
+                await client.git.deleteRef({
+                    owner: ownerOfRepository,
+                    repo: repositoryContainingBranches,
+                    ref: "heads/" + branch
+                })
+            } catch (error) {
+                const shouldFailSoftly = (soft_fail === 'true');
+                
+                if(shouldFailSoftly)
+                    core.warning(error.message)
+                else
+                    core.setFailed(error.message)
+            }
         }
     } catch (error) {
         core.setFailed(error.message)
