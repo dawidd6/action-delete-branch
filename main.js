@@ -10,7 +10,7 @@ async function main() {
         const branches = core.getInput("branches")
         const prefix = core.getInput("prefix")
         const suffix = core.getInput("suffix")
-        
+
         const client = github.getOctokit(token)
 
         let branchesToDelete = branches ? branches.split(",") : []
