@@ -3,6 +3,7 @@
 An action that deletes multiple branches from repository.
 Optionally one can provide a `prefix` or `suffix` strings that would be appended or prepended to every branch name.
 
+
 ## Usage
 
 > Do not specify `numbers` and `branches` together when `prefix` or `suffix` are set.
