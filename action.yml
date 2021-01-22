@@ -10,10 +10,10 @@ inputs:
     required: false
     default: ${{github.token}}
   owner:
-    description: Owner of the repository. The owner will be deducted from env vars
+    description: Owner of the repository. The owner will be deducted from env vars if it is not set
     required: false
   repository:
-    description: The repository containing the branch(es) to be deleted. The repository name will be deducted from env vars
+    description: The repository containing the branch(es) to be deleted. The repository name will be deducted from env vars if it is not set
     required: false
   branches:
     description: Branches to delete (comma separated)
