@@ -10,6 +10,7 @@ async function main() {
         const branches = core.getInput("branches")
         const prefix = core.getInput("prefix")
         const suffix = core.getInput("suffix")
+        const shouldFailSoftly = core.getInput("soft_fail")
         
         const client = github.getOctokit(token)
 
@@ -43,7 +44,10 @@ async function main() {
                     ref: "heads/" + branch
                 })
             } catch (error) {
-                core.warning(error.message)
+                if(shouldFailSoftly)
+                    core.warning(error.message)
+                else
+                    core.setFailed(error.message)
             }
         }
     } catch (error) {
